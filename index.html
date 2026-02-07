@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>OXEDON SHOP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: url('/static/example1/back.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    color: #fff;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #aaa;
+}
+
+header span {
+    color: #00ffcc;
+}
+
+.categories {
+    padding: 40px 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.category-card {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-title {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+        max-height 0.6s ease,
+        opacity 0.4s ease,
+        transform 0.4s ease;
+    background: #111;
+    margin: 0 5% 30px;
+    border-radius: 20px;
+}
+
+.content.active {
+    max-height: 2000px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.items {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.item-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 100px;
+}
+
+.item-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    opacity: 1;
+    transition: 0.4s;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.overlay h3 {
+    color: #00ffcc;
+    margin-bottom: 8px;
+}
+
+.overlay p {
+    font-size: 14px;
+    color: #ddd;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+}
+
+@media (max-width: 768px) {
+
+    header h1 {
+        font-size: 32px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    .categories {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .category-card {
+        aspect-ratio: 4 / 5;
+    }
+
+    .category-title {
+        font-size: 22px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .content {
+        width: 100%;
+        margin: 0 10px 25px;
+        border-radius: 15px;
+    }
+
+    .items {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .item-card {
+        height: 100px;
+    }
+
+    .overlay h3 {
+        font-size: 18px;
+    }
+
+    .overlay p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .overlay {
+        opacity: 1;
+        background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.9),
+            rgba(0,0,0,0.3),
+            rgba(0,0,0,0.1)
+        );
+        justify-content: flex-end;
+    }
+
+    .item-card:hover .overlay {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 420px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    .category-title {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>OXEDON SHOP</h1>
+    <p>КУРСЫ, ОБУЧЕНИЯ, СОФТЫ И ИНСТРУМЕНТЫ</p>
+    <p>По всем вопросам писать <a href="https://t.me/oxedonn">@oxedonn</a></p>
+</header>
+
+<div class="categories">
+    <div class="category-card" onclick="toggleContent(0)">
+        <img src="/static/example1/4.jpg">
+        <div class="category-title">Софты</div>
+    </div>
+
+    <div class="category-card" onclick="toggleContent(1)">
+        <img src="/static/example1/2.jpg">
+        <div class="category-title">Курсы</div>
+    </div>
+
+    <div class="category-card" onclick="toggleContent(2)">
+        <img src="/static/example1/3.jpg">
+        <div class="category-title">Базы данных</div>
+    </div>
+
+    <div class="category-card" onclick="toggleContent(3)">
+        <img src="/static/example1/1.jpg">
+        <div class="category-title">Анонимность</div>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="items">
+        <div class="item-card">
+            <div class="overlay">
+                <h3>WalletGen</h3>
+                <p>Bitcoin, до 100 000 проверок/сек</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="overlay">
+                <h3>ByBit3</h3>
+                <p> всевозможные монеты, подбор 12 seed-фраз</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="overlay">
+                <h3>DefinderWallet</h3>
+                <p>Улучшенный софт, увеличенная скорость поиска</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="overlay">
+                <h3>CryptoFinder</h3>
+                <p>Специализируется на находке криптокошельков</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="items">
+        <div class="item-card">
+            <div class="overlay">
+                <h3>Арбитраж трафика, криптовалюты</h3>
+                <p>Рефаунд-10$, состоит из 10 уроко</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="overlay">
+                <h3>Трейдинг</h3>
+                <p>45 уроков — 20$</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="overlay">
+                <h3>Промохантинг</h3>
+                <p>Весь курс - 5$</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="overlay">
+                <h3>Веб-дизайн</h3>
+                <p>Весь курс - 15$</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="items">
+        <div class="item-card">
+            <div class="overlay">
+                <h3>Пробив</h3>
+                <p>IP, VIN, телефон, авто</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+
+        <div class="item-card">
+            <div class="overlay">
+                <h3>Софт</h3>
+                <p>7 софтов для пробива и докса, и 1 программа по сносу.</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="items">
+        <div class="item-card">
+            <div class="overlay">
+                <h3>VPN / Proxy</h3>
+                <p>Двойной туннель</p>
+                <a href="https://t.me/oxedonn">@oxedonn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    По всем вопросам — <a href="https://t.me/oxedonn">@oxedonn</a>
+</footer>
+
+<script>
+function toggleContent(index) {
+    const blocks = document.querySelectorAll('.content');
+    const categories = document.querySelectorAll('.category-card');
+
+    blocks.forEach((block, i) => {
+        if (i === index) {
+            const isOpen = block.classList.contains('active');
+
+            blocks.forEach(b => b.classList.remove('active'));
+
+            if (!isOpen) {
+                block.classList.add('active');
+                setTimeout(() => {
+                    block.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 200);
+            }
+        } else {
+            block.classList.remove('active');
+        }
+    });
+}
+</script>
+
+</body>
+</html>
